@@ -26,10 +26,6 @@
   }, (error) => console.log(error));
 */
 
-
-
-
-
 // Iteration 1 - using callbacks
 
 getInstruction("mashedPotatoes", 0, (step1) => {
@@ -126,15 +122,13 @@ makeBroccoli()
 // Bonus 2 - Promise all
 
 const loopOverInstructions = async () => {
-  const newArray = []
+  const arrayOfPromises = []
   brusselsSprouts.forEach((element, index) => {
-    newArray.push(obtainInstruction("brusselsSprouts",index))
+    arrayOfPromises.push(obtainInstruction("brusselsSprouts",index))
   })
-  console.log(newArray)
-  Promise.all(newArray).then((value) => {
-    console.log(value)
-    value.forEach((element) => {
-      document.querySelector("#brusselsSprouts").innerHTML += `<li>${element}</li>`
+  Promise.all(arrayOfPromises).then((arrayOfStrings) => {
+    arrayOfStrings.forEach((instruction) => {
+      document.querySelector("#brusselsSprouts").innerHTML += `<li>${instruction}</li>`
     })
     document.querySelector("#brusselsSprouts").innerHTML += `<li>Brussels Sprouts is ready</li>`
     document.querySelector("#brusselsSproutsImg").removeAttribute("hidden")
